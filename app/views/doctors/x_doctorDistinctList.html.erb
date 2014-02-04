@@ -1,0 +1,7 @@
+<%@doctors = Doctor.select('DISTINCT specialisation')%>
+
+<% @doctors.each do |c| %>
+    <a href="/specialisation/<%=c.specialisation%>" id="specialisationlisting"><%=c.specialisation%></a>
+    <br/>
+<%end%>
+

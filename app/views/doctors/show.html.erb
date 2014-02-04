@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+<div id="text-content">
+
+  <p><b>First name:</b><%= @doctor.first_name %></p>
+  <p><b>Last name:</b><%= @doctor.last_name %></p>
+  <p><b>Dob:</b><%= @doctor.dob %></p>
+  <p><b>Pps no:</b><%= @doctor.pps_no %></p>
+  <p><b>Email:</b><%= @doctor.email %></p>
+  <p><b>Gender:</b><%= @doctor.gender %></p>
+  <p>
+    <b>Specialisation:</b>
+    <%= @doctor.specialisations.map(&:name).join(", ") %>
+  </p>
+
+  <%= link_to 'Edit', edit_doctor_path(@doctor) %> |
+  <%= link_to 'Back', doctors_path %>
+</div>

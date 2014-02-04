@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+<div id="text-content">
+
+<p>
+  <b>First name:</b>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <b>Dob:</b>
+  <%= @user.dob %>
+</p>
+
+<p>
+  <b>Pps no:</b>
+  <%= @user.pps_no %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @user.gender %>
+</p>
+
+    <p>
+    <b>Specialisation:</b>
+    <%= @user.specialisations.map(&:name).join(", ") %>
+  </p>
+
+  <p>
+    <b>Role:</b>
+    <%= @user.roles.map(&:name).join(", ") %>
+  </p>
+
+
+
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+</div>

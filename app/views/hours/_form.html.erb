@@ -1,0 +1,36 @@
+<%= form_for(@hour) do |f| %>
+  <% if @hour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hour.errors.count, "error") %> prohibited this hour from being saved:</h2>
+
+      <ul>
+      <% @hour.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :appointment_time %><br />
+    <%= f.time_select :appointment_time, :as => :timepicker %>
+  </div>
+  <div class="field">
+    <%= f.label :appointment_date %><br />
+    <%= f.date_select :appointment_date, :as => :datepicker %>
+  </div>
+
+    <div class="field">
+      <h3> Doctors available:</h3>
+      <% @doctors.each do |doctor| %>
+          <p>
+            <%= check_box_tag "hour[doctor_id]", doctor.id, @hour.doctor == doctor %>
+            <%= doctor.first_name %>
+            <%= doctor.last_name %>
+          </p>
+      <% end %>
+     </div>
+  <div class="actions">
+    <%= f.submit "Create Time Slot" %>
+  </div>
+<% end %>

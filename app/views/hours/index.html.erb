@@ -1,0 +1,37 @@
+<h1>Listing of time slots available for patients</h1>
+
+<table>
+  <tr>
+    <th>Appointment time</th>
+    <th>Appointment date</th>
+    <th>Doctor</th>
+    <% if current_user %>
+        <% if current_user.admin %>
+  <th colspan="3">Action</th>
+<% end %>
+    <% end %>
+        </tr>
+
+<% @hours.each do |hour| %>
+  <tr>
+    <td><%= hour.appointment_time %></td>
+    <td><%= hour.appointment_date %></td>
+    <td><%= hour.doctor.first_name %> <%= hour.doctor.last_name %></td>
+
+    <% if current_user %>
+        <% if current_user.admin %>
+          <td><%= link_to 'Show', hour %></td>
+    <td><%= link_to 'Edit', edit_hour_path(hour) %></td>
+    <td><%= link_to 'Destroy', hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<% if current_user %>
+    <% if current_user.admin %>
+        <%= link_to 'New Hour', new_hour_path %>
+     <% end %>
+<% end %>

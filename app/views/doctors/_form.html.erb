@@ -1,0 +1,55 @@
+<%= form_for(@doctor) do |f| %>
+    <% if @doctor.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@doctor.errors.count, "error") %> prohibited this doctor from being saved:</h2>
+
+          <ul>
+            <% @doctor.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :first_name %><br />
+      <%= f.text_field :first_name %>
+    </div>
+    <div class="field">
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name %>
+    </div>
+    <div class="field">
+      <%= f.label :dob %><br />
+      <%= f.date_select :dob, :start_year => Time.now.year - 90, :end_year => Time.now.year - 16 %>
+    </div>
+    <div class="field">
+      <%= f.label :pps_no %><br />
+      <%= f.text_field :pps_no %>
+    </div>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.text_field :email %>
+    </div>
+    <div class="field">
+      <%= f.label :password %><br />
+      <%= f.text_field :password %>
+    </div>
+    <div class="field">
+      <%= f.label :gender %><br />
+      <%= f.select :gender, Doctor::GENDERS, prompt: 'Select your gender' %>
+    </div>
+
+
+    <div class="specialisation">
+      <% @specialisations.each do |specialisation| %>
+          <p>
+            <%= check_box_tag "doctor[specialisation_ids][]", specialisation.id, @doctor.specialisations.include?(specialisation) %>
+            <%= specialisation.name %>
+          </p>
+      <% end %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

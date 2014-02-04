@@ -1,0 +1,44 @@
+<h1>List of Doctors</h1>
+
+<table>
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Dob</th>
+    <th>Pps no</th>
+    <th>Email</th>
+    <th>Password</th>
+    <th>Gender</th>
+    <th>Specialization</th>
+    <th>Role</th>
+    <th>Appointment</th>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Destroy</th>
+  </tr>
+
+  <% @doctor.each do |user| %>
+      <tr>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.dob %></td>
+        <td><%= user.pps_no %></td>
+        <td><%= user.email %></td>
+        <td><%= user.password %></td>
+        <td><%= user.gender %></td>
+        <td><%= user.specialisations.map(&:name).join(", ") %></td>
+        <td><%= user.roles.map(&:name).join(", ") %></td>
+        <td><%= user.appointments.map(&:name).join(", ") %></td>
+
+
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User', new_user_path %>
+

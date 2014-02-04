@@ -1,0 +1,47 @@
+<div>
+  <% if notice %>
+      <p class="notification notice">
+        <%= notice %>
+      </p>
+  <% end %>
+
+  <% if alert %>
+      <p class="notification alert">
+        <%= alert %>
+      </p>
+  <%end%>
+<h1>List of all patients</h1>
+
+<table>
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Dob</th>
+    <th>Pps no</th>
+    <th>Email</th>
+    <th>Gender</th>
+    <th colspan="3">Action</th>
+  </tr>
+
+  <% @patients.each do |patient| %>
+      <tr>
+        <td><%= patient.first_name %></td>
+        <td><%= patient.last_name %></td>
+        <td><%= patient.dob %></td>
+        <td><%= patient.pps_no %></td>
+        <td><%= patient.email %></td>
+        <td><%= patient.gender %></td>
+
+
+        <td><%= link_to 'Show', patient %></td>
+        <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
+        <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Patient', new_patient_path %>
+
+</div>

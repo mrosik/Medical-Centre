@@ -1,0 +1,90 @@
+                    <!DOCTYPE html>
+                    <html xmlns="http://www.w3.org/1999/html">
+                    <head>
+                      <title>Doctors</title>
+                      <%= stylesheet_link_tag "application", :media => "all" %>
+                      <%= javascript_include_tag "application" %>
+                      <%= csrf_meta_tags %>
+                      <!--added 11.03.2013 with gem devise-->
+                      <p class="notice"><%= notice %></p>
+
+                      <p class="alert"><%= alert %></p>
+
+                    </head>
+                    <body>
+                    <div id="container">
+                      <div id="top_box">
+                        <div id="links">
+                          <!-- REF. login devise 2.1.3 RailsCast -->
+                          <% if current_user %>
+                              Logged in as <strong><%= current_user.email %></strong>
+                              <%= link_to 'Logout', logout_path, :method => :delete %>
+                          <% else %>
+                              <%= link_to "Sign up", new_patient_path %> |
+                              <%= link_to "Login", login_path %>
+                          <% end %>
+                          <!--should not be here->  <!-- REF. END -->
+                        </div>
+                      </div>
+                      <div id="bottom_box">
+                        <%= image_tag("viola.jpg", :id => "bg") %>
+                        <!--Photography by: Monika Rosik-->
+                        <div id="total">
+                          <div id="banner">
+                            <%= image_tag("logo2.png", :size => '400x130') %>
+                          </div>
+                          <div id="menu">
+                            <ul id="navigation">
+                              <li><a href="about.html">About</a></li>
+                              <li><a href="/doctors">Doctors</a></li>
+                              <% if current_user %>
+                                  <% if current_user.admin %>
+                                      <li><a href="/patients">Patients</a></li>
+                                  <% end %>
+                              <% end %>
+                              <li><a href="/specialisations">Specialisations</a></li>
+                              <li><a href="/appointments/new">Book Appointment</a></li>
+                              <li><a href="/home">Information</a></li>
+                            </ul>
+                          </div>
+
+                          <!--<ul id="specialisationlisting">
+                             <!--'//*#< = render 'doctors/x_doctorDistinctList' %>
+                           </ul>    -->
+
+                          <div id="column">
+                            <div id="side">
+                              <% if current_user %>
+                                  <br/>
+                                  <%= link_to 'New Appointment', new_appointment_path %>
+                                  <br/>
+                                  <%= link_to 'Doctors Appointments', hours_path %>
+                                  <br/>
+                                  <% if current_user.admin %>
+                                      <%= link_to 'All Users', users_path, :class => "#{'selected' if @tab=='users'}" %>
+                                      <br/>
+                                      <%= link_to 'New Patient', new_patient_path %>
+                                      <br/>
+                                      <%= link_to 'New Doctor', new_doctor_path %>
+                                      <br/>
+                                      <%= link_to 'New Specialisation', new_specialisation_path %>
+                                      <br/>
+                                      <%= link_to 'New Time Slot for Appointment', new_hour_path %>
+                                      <br/>
+                                      <%= link_to 'Appointments List', appointments_path %>
+                                      <br/>
+                                  <% end %>
+                              <% end %>
+                            </div>
+
+                            <div id="main">
+                              <%= yield %>
+                            </div>
+                          </div>
+
+                          <div id="footer">
+                            <p>Online Doctors © All rights reserved </p>
+                          </div>
+                        </div>
+
+                    </html>
